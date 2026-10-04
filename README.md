@@ -8,12 +8,12 @@ This repository contains one portable [Agent Skill](https://agentskills.io/speci
 
 ## Install
 
-Use [GitHub CLI 2.90.0 or later](https://cli.github.com/manual/gh_skill_install). Replace `OWNER` with the GitHub account or organization that publishes this repository. These commands install Prism for your user account, across projects:
+Use [GitHub CLI 2.90.0 or later](https://cli.github.com/manual/gh_skill_install) to install Prism for your user account, across projects. Run the command for your agent:
 
 ```bash
-gh skill install OWNER/prism prism --agent claude-code --scope user
-gh skill install OWNER/prism prism --agent codex --scope user
-gh skill install OWNER/prism prism --agent github-copilot --scope user
+gh skill install pengbin2015/prism prism --agent claude-code --scope user
+gh skill install pengbin2015/prism prism --agent codex --scope user
+gh skill install pengbin2015/prism prism --agent github-copilot --scope user
 ```
 
 Run only the command for the agent you use, or run all three. To install for one project instead, omit `--scope user` and run the command inside that project's Git repository. GitHub CLI places the skill in the host's expected directory. You can also download `skills/prism/` and copy that **whole folder**, including `references/`, into a supported skills directory.
