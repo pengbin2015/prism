@@ -40,6 +40,14 @@ Prism works without the PDF for ordinary explanations. It uses original clear-wr
 
 ## Use Prism
 
+Prism can choose the explanatory format for you. Give it the concept, your question, and any relevant audience or constraints. It identifies what is difficult to understand, then chooses text, diagrams, interactive HTML, or animation. Slides provide staged guidance when useful; animation provides a timed visual progression. An explicitly requested format takes precedence.
+
+For example:
+
+> Use Prism to explain binary search to a learner who knows arrays and loops. Choose the clearest format for understanding why the search takes logarithmic time.
+
+The same concept can lead to different outputs. A short trace may explain binary search's logarithmic cost in text. Trying different targets benefits from interactive HTML. Watching the search interval contract may benefit from animation. Prism should choose the simplest form that explains the particular difficulty and briefly explain substantial artifact choices.
+
 Ask normally, or invoke the skill by name if your agent supports it:
 
 - “Use Prism to explain why a distributed rate limiter needs shared state. Show one request sequence.”
@@ -57,6 +65,115 @@ skills/prism/
 ├── references/visual-explanations.md  Diagram, HTML, and animation guidance
 └── .gitignore                      Keeps locally supplied ASD files out of Git
 ```
+
+## Create narrated animations
+
+Use this workflow when animation is selected or explicitly requested. Prism can guide animations for different subjects, courses, audiences, and durations. Choose the visual model and tools for the concept. The workflow below uses Manim for exact geometry, Kokoro for optional local narration, and FFmpeg for assembly. Other tools can be used when they better fit the requested output.
+
+Your AI agent can perform the complete workflow: inspect existing tools, create an isolated environment, install required dependencies, generate animation and audio, combine them, verify the result, and rebuild from saved source. Ask the agent to do the work; the commands below are reproducibility references and can also be run manually. Installation and execution depend on the agent's available tools and permissions. The agent should request any required approval and explain specific blockers.
+
+For example:
+
+> Use Prism to create a narrated animation explaining this concept. Set up the required tools, generate the animation and audio separately, combine them, and verify the result.
+
+For an existing animation:
+
+> Rebuild this animation from its saved source and dependencies. Check the output and report any checks you could not complete.
+
+### Plan the explanation
+
+Identify the audience, prerequisites, learning objective, and target duration. Plan a sequence that introduces the visual model, shows a meaningful change, explains its cause, and applies the idea to another case. Match each spoken passage to the visual event it explains. Use an original visual treatment and a supplied or authorised voice.
+
+For each animation, choose a working folder such as `demo/my-animation/`. Keep its source, script, environment, caches, and generated artifacts together. Use names and durations appropriate to that animation. Keep setup and rebuild documentation in this root README.
+
+### Set up a local Python environment
+
+Install [uv](https://docs.astral.sh/uv/) if it is unavailable. Python 3.12 is the verified baseline for the Manim and Kokoro combination used here. Check compatibility before changing dependency versions.
+
+For macOS with Homebrew, install the native rendering, text, speech, and media dependencies:
+
+```sh
+brew install cairo pkg-config pango ffmpeg espeak-ng
+```
+
+Other operating systems need equivalent native dependencies; follow the [Manim installation guide](https://docs.manim.community/en/stable/installation/uv.html) and [Kokoro instructions](https://github.com/hexgrad/kokoro).
+
+From the repository root, choose the animation folder and create its environment:
+
+```sh
+animation_dir="demo/my-animation"
+mkdir -p "$animation_dir"
+uv venv --python 3.12 --seed "$animation_dir/.venv"
+UV_CACHE_DIR="$animation_dir/.cache/uv" uv pip install --python "$animation_dir/.venv/bin/python" 'manim[typst]' 'kokoro==0.9.4' soundfile
+```
+
+The folder name is an example. Set `animation_dir` to the actual destination when running these commands. Omit Kokoro and SoundFile for animations without narration. Manim's Typst support can render mathematical text without LaTeX; sources that use `MathTex` or `Tex` need a suitable LaTeX installation.
+
+Record the working environment for reproducible rebuilds:
+
+```sh
+"$animation_dir/.venv/bin/python" -m pip freeze > "$animation_dir/requirements.txt"
+```
+
+Recreate a recorded environment by installing its requirements file instead of selecting fresh package versions:
+
+```sh
+UV_CACHE_DIR="$animation_dir/.cache/uv" uv pip install --python "$animation_dir/.venv/bin/python" -r "$animation_dir/requirements.txt"
+```
+
+Ignore `.venv/`, `.cache/`, and `__pycache__/` in each animation folder. The Python runtime and native dependencies may be managed outside that folder; the virtual environment is local.
+
+### Generate animation and narration separately
+
+Create editable Manim source and, when narration is requested, a script with timed passages. Use exact calculations for algorithms, equations, and state transitions. Label illustrative simulations and state their limitations.
+
+Configure generated media under the chosen animation folder. For local speech generation, set `HF_HOME`, `TORCH_HOME`, and `XDG_CACHE_HOME` beneath its `.cache/` directory before importing model libraries. Kokoro's first run downloads model weights, a voice, and language assets. Select a voice that matches the narration language and save its audio as a separate WAV file. Kokoro's standard output sample rate is 24 kHz.
+
+Render a short preview and synthesise a short speech sample before producing the complete animation. Measure speech duration, then align narration and visual events. Allow time to inspect important states. Derive caption timing from the final audio. If sentence audio is cached, include text, voice, and speech settings in the cache key.
+
+A typical Manim render command, run from the animation folder, is:
+
+```sh
+.venv/bin/manim -qh --fps 60 animation.py SceneName
+```
+
+Replace `animation.py` and `SceneName` with the actual source and scene class. Resolution and frame rate are choices for the intended use. Any narration or assembly scripts must be created for that project; Prism does not supply universal scripts with those names.
+
+### Combine and verify
+
+After aligning the separate video and audio to the intended timeline, combine them with FFmpeg. For example, from the animation folder:
+
+```sh
+ffmpeg -i animation-silent.mp4 -i narration.wav -map 0:v:0 -map 1:a:0 -c:v copy -c:a aac -b:a 128k -movflags +faststart animation-narrated.mp4
+```
+
+Use the actual filenames. Check durations before assembly so the result has no unintended silent tail or truncated explanation. Add subtitles and chapters when useful. Keep the separate silent animation and narration available for reuse.
+
+Check the underlying calculations and important transitions independently of the visuals. Inspect rendered frames and playback for readability, synchronisation, and pacing. Listen for pronunciation and audio quality. Verify final duration, resolution, audio presence, and decoding. Report completed checks and any remaining limitations separately.
+
+### Worked example: gradient descent
+
+The existing example in `demo/animation/` uses the workflow above for a three-minute explanation. It includes:
+
+- [Final narrated video](demo/animation/gradient-descent-narrated.mp4), [silent animation](demo/animation/animation-silent.mp4), and [separate narration](demo/animation/narration.wav).
+- [Storyboard](demo/animation/storyboard.md), [Manim source](demo/animation/gradient_descent.py), and [narration script](demo/animation/narration.json).
+- Project-specific [audio generation](demo/animation/generate_audio.py), [assembly](demo/animation/assemble.py), and [verification](demo/animation/verify.py) scripts.
+- A local `.venv/`, recorded `requirements.txt`, captions, timing records, and review frames.
+
+To rebuild this example, run from `demo/animation/`:
+
+```sh
+.venv/bin/python generate_audio.py
+.venv/bin/manim -qh --fps 60 gradient_descent.py GradientDescent
+.venv/bin/python assemble.py
+.venv/bin/python verify.py
+```
+
+These scripts encode this example's six scenes, 180-second timeline, selected voice, and mathematical checks. Adapt those decisions for a different animation. After the initial model downloads, this example supports `HF_HUB_OFFLINE=1` for audio regeneration. Its narration generator checks that speech fits each scene's time slot.
+
+### Tools and licences
+
+See [Manim Community](https://github.com/ManimCommunity/manim), [Kokoro](https://github.com/hexgrad/kokoro), the [Kokoro model card](https://huggingface.co/hexgrad/Kokoro-82M), and [FFmpeg](https://ffmpeg.org/) for their documentation and licences. Keep virtual environments and model caches out of Git.
 
 ## Maintain and publish
 

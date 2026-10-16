@@ -4,7 +4,7 @@ description: >-
   Make concepts, ideas, and knowledge clear for personal understanding or for
   teaching others. Use when asked for a clearer explanation, causal account,
   diagram, interactive HTML page, teaching document or slides, or a custom
-  3Blue1Brown-style animation. Choose the form that reveals the idea and use
+  concept-driven animation. Choose the form that reveals the idea and use
   concise, ASD-STE100-informed writing without hiding important reasoning.
 ---
 
@@ -28,14 +28,20 @@ State material assumptions briefly. Ask a focused question only if missing infor
 
 Honor an explicitly requested format. Otherwise, select the form that reveals the difficult relationship most clearly.
 
-| Need | Form | What it reveals |
-| --- | --- | --- |
-| Meaning, rationale, or a small distinction | Clear writing and a concrete example | The idea and its consequence |
-| Structure, ownership, comparison, or relationships | Diagram or image | How parts relate |
-| A variable, state, or trade-off to explore | Interactive HTML page | What changes when an input changes |
-| A transformation, sequence, geometry, or invisible process | Custom 3Blue1Brown-style animation | How the reasoning evolves |
+First identify what the learner needs to understand and what makes it difficult: meaning, relationships, the effect of changing inputs, or a transformation over time. Choose the simplest form that makes that difficulty clear. The same concept can need different forms for different questions or learners.
 
-Do not create every form by default. Read [visual-explanations.md](references/visual-explanations.md) when the task needs a diagram, interactive page, or animation.
+| What helps the learner understand? | Likely form | What it reveals |
+| --- | --- | --- |
+| A definition, argument, short example, or comparison | Text | The idea and its consequence |
+| Seeing structure or relationships | Text with a diagram, or diagram-based HTML slides | How parts relate |
+| Changing inputs, comparing outcomes, or inspecting states | Interactive HTML | How choices affect the result |
+| Watching geometry, state, or a process transform in a controlled sequence | Concept-driven animation | How a change produces its consequence |
+
+Choose the explanatory approach before the delivery structure. Use slides for a requested presentation or when staged guidance helps; use a continuous page when exploration benefits from keeping information together. HTML can contain diagrams, interaction, or animation. A sequence alone does not require a video: prefer interaction when learners need to control the sequence or test alternatives, and timed animation when the planned visual progression explains the mechanism.
+
+If text alone explains the concept adequately and no presentation format is requested, answer directly in text. When several treatments help, choose one primary format and add supporting elements where useful. Apply a 3Blue1Brown-inspired approach when requested or useful; it is not a requirement for every animation.
+
+Make the format choice without asking the user to choose a medium unless missing audience information or constraints would materially change the result. Briefly explain the choice before producing a substantial artifact. Do not create every form by default. Read [visual-explanations.md](references/visual-explanations.md) when the task needs slides, a diagram, an interactive page, or an animation. Apply only the guidance relevant to the selected format.
 
 Prism guides the explanation and learning design. Use the tools and artifact workflows available in the current host to create the requested file or visual. For a slide deck or document, let the available presentation or document workflow handle file construction. For exact algorithms, equations, charts, and state transitions, use exact data, code, or vector graphics instead of generated imagery.
 
@@ -51,6 +57,8 @@ Adapt this sequence to the task. Do not force every step into a short answer.
 
 Keep names, colors, units, notation, and inputs consistent. Label simulations and simplifications. State where an analogy stops matching the real mechanism.
 
+For slide decks, give each slide a clear purpose that advances the learning objective. Connect examples and activities across slides. Explain changes in context or assumptions before learners use the new information.
+
 ## 4. Write clearly
 
 Use STE-informed writing by default: precise terms, direct verbs, clear actors, explicit conditions, gradual information, and consistent terminology. Aim for no more than 20 words in a procedural sentence and 25 words in a descriptive sentence. Keep each paragraph on one topic. Treat these lengths as revision targets; do not remove needed reasoning to meet them.
@@ -65,12 +73,14 @@ Delete generic introductions, promotional adjectives, repeated summaries, and un
 
 For a creation request, produce the artifact. Follow [visual-explanations.md](references/visual-explanations.md) for visual design and format-specific checks. Use the current host's available tools. If a required production tool is unavailable, explain the limitation and provide the closest useful result in its actual format.
 
+Handle required setup and execution within the user's authorization and the environment's permissions. Inspect existing tools before installing dependencies. Create or reuse an isolated environment when needed, and request approval for actions that require it. For a rebuild request, use the saved source and recorded dependencies to produce and verify the output. If blocked, identify the specific blocker, the work completed, and any user action needed to continue.
+
 Before delivery:
 
 - Check calculations, state transitions, causal claims, and a boundary case.
-- Check that the artifact supports the learning objective.
+- Check that the explanation supports the learning objective and that the chosen medium reveals the difficult relationship. Simplify when added visuals, interaction, or motion provide no explanatory value, while preserving an explicitly requested format.
 - Remove elements that provide no reasoning, orientation, accessibility, or useful practice.
 - Inspect the rendered visual when possible. Test interactions, animation, and narration when present.
-- State material checks that could not be completed.
+- Report content checks, rendered inspection, and interaction checks separately where applicable. State material checks that could not be completed.
 
 Preserve editable source when it may need reuse. Follow the current host's file-saving process. Do not publish beyond the requested destination. For personal understanding, return the explanation directly. For artifact requests, return the artifact and a short account of its purpose and limitations.

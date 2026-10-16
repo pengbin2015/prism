@@ -1,0 +1,14 @@
+.venv/
+.cache/
+__pycache__/
+
+# Intermediate renders, audio segments, and review captures
+media/
+audio/
+review/
+*.log
+
+# Regenerated assembly metadata and verification reports
+audio-timing.json
+chapters.ffmeta
+verification.json
