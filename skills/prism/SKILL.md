@@ -4,7 +4,8 @@ description: >-
   Make concepts, ideas, and knowledge clear for personal understanding or for
   teaching others. Use when asked for a clearer explanation, causal account,
   diagram, interactive HTML page, teaching document or slides, or a custom
-  concept-driven animation. Choose the form that reveals the idea and use
+  concept-driven animation. Clarify the learner and goal when needed, identify
+  the learning difficulty, and choose a suitable form. Use
   concise, ASD-STE100-informed writing without hiding important reasoning.
 ---
 
@@ -18,24 +19,34 @@ Include examples, steps, comparisons, or visuals when they help the learner unde
 
 ## 1. Identify the learner and objective
 
-Use the supplied audience, sources, objective, and format. Preserve explicit constraints.
+Use the conversation and supplied material first. Preserve the requested audience, sources, objective, format, and constraints. Distinguish the requester's knowledge from the audience's knowledge when creating teaching materials.
 
-For personal understanding, address the user's question and confusion. Adapt to demonstrated knowledge. For teaching materials, identify prerequisites and likely misconceptions, then arrange the requested material in a useful progression. Add practice when it helps learners apply the idea.
+Establish who the learner is, what relevant knowledge they already have, where they are confused, and what they should understand or do afterward. Ask focused questions when missing information would materially change prerequisites, depth, examples, progression, or explanation design. Do not ask for information already available or require a questionnaire for every request.
 
-State material assumptions briefly. Ask a focused question only if missing information changes the result. Otherwise, proceed. Keep internal planning brief unless requested. A quick question may need only a direct answer and an example.
+Start with the highest-value question. Group a few independent questions when useful; defer questions that depend on unanswered ones. Ask about concrete knowledge rather than relying on labels such as “beginner.” Accept “I don't know.” A small example or prediction question can help reveal the learner's current mental model without making clarification an exam.
 
-## 2. Select the output form
+Wait for answers before making design choices that depend on them. Adapt follow-up questions to the answers. Stop asking once remaining uncertainty would not materially change the explanation. If the user requests an immediate answer, proceed with brief, explicit assumptions. A quick question may need only a direct answer and an example. Keep internal planning brief unless requested.
+
+Read [learner-discovery.md](references/learner-discovery.md) when meaningful clarification is needed. It provides question patterns and examples, not a mandatory interview. Prism does not require a separate interview skill.
+
+## 2. Identify the learning difficulty
+
+Identify the gap between what the learner knows and what the learning goal requires. Look for missing prerequisites, unfamiliar terms, misconceptions, abstractions, hidden state, difficult relationships, or transformations. Treat an inferred misconception as a hypothesis until the learner's answers or work support it.
+
+Use this diagnosis to choose the starting point, worked example, depth, and progression. Introduce needed prerequisites where they become useful. For teaching materials, arrange the requested content so learners can build on established knowledge. Add practice when it helps them apply the idea.
+
+## 3. Select the output form
 
 Honor an explicitly requested format. Otherwise, select the form that reveals the difficult relationship most clearly.
 
-First identify what the learner needs to understand and what makes it difficult: meaning, relationships, the effect of changing inputs, or a transformation over time. Choose the simplest form that makes that difficulty clear. The same concept can need different forms for different questions or learners.
+Use the identified learning difficulty to choose the simplest form that makes it clear. Adapt the explanation within an explicitly requested format; do not reopen that choice unnecessarily. The same concept can need different forms for different questions or learners.
 
-| What helps the learner understand? | Likely form | What it reveals |
+| Learning difficulty | Likely form | What it reveals |
 | --- | --- | --- |
-| A definition, argument, short example, or comparison | Text | The idea and its consequence |
-| Seeing structure or relationships | Text with a diagram, or diagram-based HTML slides | How parts relate |
-| Changing inputs, comparing outcomes, or inspecting states | Interactive HTML | How choices affect the result |
-| Watching geometry, state, or a process transform in a controlled sequence | Concept-driven animation | How a change produces its consequence |
+| Meaning, reasoning, or comparison | Clear writing with a worked example | The idea and its consequence |
+| Structure, dependency, or spatial relationships | Text with a diagram, or diagram-based HTML slides | How parts relate |
+| Effects of changing inputs, comparing alternatives, or inspecting hidden state | Interactive HTML | How choices affect the result |
+| A transformation or mechanism best understood through motion | Concept-driven animation | How a change produces its consequence |
 
 Choose the explanatory approach before the delivery structure. Use slides for a requested presentation or when staged guidance helps; use a continuous page when exploration benefits from keeping information together. HTML can contain diagrams, interaction, or animation. A sequence alone does not require a video: prefer interaction when learners need to control the sequence or test alternatives, and timed animation when the planned visual progression explains the mechanism.
 
@@ -45,7 +56,7 @@ Make the format choice without asking the user to choose a medium unless missing
 
 Prism guides the explanation and learning design. Use the tools and artifact workflows available in the current host to create the requested file or visual. For a slide deck or document, let the available presentation or document workflow handle file construction. For exact algorithms, equations, charts, and state transitions, use exact data, code, or vector graphics instead of generated imagery.
 
-## 3. Explain the mechanism
+## 4. Explain the mechanism
 
 Adapt this sequence to the task. Do not force every step into a short answer.
 
@@ -59,7 +70,7 @@ Keep names, colors, units, notation, and inputs consistent. Label simulations an
 
 For slide decks, give each slide a clear purpose that advances the learning objective. Connect examples and activities across slides. Explain changes in context or assumptions before learners use the new information.
 
-## 4. Write clearly
+## 5. Write clearly
 
 Use STE-informed writing by default: precise terms, direct verbs, clear actors, explicit conditions, gradual information, and consistent terminology. Aim for no more than 20 words in a procedural sentence and 25 words in a descriptive sentence. Keep each paragraph on one topic. Treat these lengths as revision targets; do not remove needed reasoning to meet them.
 
@@ -69,7 +80,7 @@ If the file is absent, continue ordinary explanations with the clear-writing pri
 
 Delete generic introductions, promotional adjectives, repeated summaries, and unrelated background. Keep the worked example and its reasoning. Let a visual show relationships; use nearby text or narration to explain their meaning.
 
-## 5. Build and verify
+## 6. Build and verify
 
 For a creation request, produce the artifact. Follow [visual-explanations.md](references/visual-explanations.md) for visual design and format-specific checks. Use the current host's available tools. If a required production tool is unavailable, explain the limitation and provide the closest useful result in its actual format.
 
@@ -78,6 +89,7 @@ Handle required setup and execution within the user's authorization and the envi
 Before delivery:
 
 - Check calculations, state transitions, causal claims, and a boundary case.
+- Check that the explanation starts from established knowledge, introduces needed terms and prerequisites, and addresses the identified learning difficulty. Use a short prediction or application question when it helps assess understanding; do not make every answer a quiz.
 - Check that the explanation supports the learning objective and that the chosen medium reveals the difficult relationship. Simplify when added visuals, interaction, or motion provide no explanatory value, while preserving an explicitly requested format.
 - Remove elements that provide no reasoning, orientation, accessibility, or useful practice.
 - Inspect the rendered visual when possible. Test interactions, animation, and narration when present.

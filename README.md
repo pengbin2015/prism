@@ -1,6 +1,6 @@
 # Prism
 
-Prism helps an AI agent explain an idea so a person can understand it. It is especially useful for explaining technical ideas clearly or teaching them to others. It also guides the explanation and learning design of teaching materials. It chooses between clear writing, diagrams, interactive HTML, and concept-driven animation. It does not create every format for every question.
+Prism helps an AI agent explain an idea so a person can understand it. It is especially useful for explaining technical ideas clearly or teaching them to others. It also guides the explanation and learning design of teaching materials. It clarifies the audience, prior knowledge, and learning goal when needed, identifies what makes the concept difficult, then chooses clear writing, diagrams, interactive HTML, or concept-driven animation. It does not create every format for every question.
 
 Prism was inspired by Andrej Karpathy's idea of using language models to make ideas easier to understand through clear writing, diagrams, interactive web pages, and custom explainer videos.
 
@@ -40,9 +40,11 @@ Prism works without the PDF for ordinary explanations. It uses original clear-wr
 
 ## Use Prism
 
-Prism can choose the explanatory format for you. Give it the concept, your question, and any relevant audience or constraints. It identifies what is difficult to understand, then chooses text, diagrams, interactive HTML, or animation. Slides provide staged guidance when useful; animation provides a timed visual progression. An explicitly requested format takes precedence.
+Prism can choose the explanatory format for you. Give it the concept, your question, and any relevant audience or constraints. It uses the conversation to identify the learner, relevant prior knowledge, and learning goal. When a missing detail would change the explanation, it asks focused questions and adapts follow-ups to the answers. It stops when it has enough information, identifies the learning difficulty, then chooses text, diagrams, interactive HTML, or animation. It checks that the result addresses that difficulty and supports the goal. Slides provide staged guidance when useful; animation provides a timed visual progression. An explicitly requested format takes precedence.
 
-For example:
+For an underspecified request such as “Use Prism to explain transformers,” Prism might first ask: “Do you mean transformer models in AI or electrical transformers?” For AI models, a useful next question could be: “Are you looking for an intuitive overview or trying to trace how attention works?” Questions about prior knowledge should follow the selected goal when that knowledge matters.
+
+When the request already provides enough context, Prism proceeds directly. For example:
 
 > Use Prism to explain binary search to a learner who knows arrays and loops. Choose the clearest format for understanding why the search takes logarithmic time.
 
@@ -62,6 +64,7 @@ The result depends on the agent's available tools. For example, an agent without
 ```text
 skills/prism/
 ├── SKILL.md                        Explanation workflow and writing guidance
+├── references/learner-discovery.md    Adaptive clarification guidance
 ├── references/visual-explanations.md  Diagram, HTML, and animation guidance
 └── .gitignore                      Keeps locally supplied ASD files out of Git
 ```

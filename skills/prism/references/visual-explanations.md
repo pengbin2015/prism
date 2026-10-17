@@ -4,6 +4,8 @@ Apply the writing guidance in [SKILL.md](../SKILL.md) to labels, narration, capt
 
 Choose layout, color, and visual language for the concept, learner, and viewing setting. Follow any supplied style or template. Do not impose one palette or panel layout on every explanation.
 
+Use the learner knowledge, goal, and learning difficulty established in [SKILL.md](../SKILL.md). Introduce unfamiliar notation and visual conventions before relying on them.
+
 Choose each visual or interaction for the relationship it helps learners understand. When the user requests feature coverage, map the requested features to useful learning activities. Place supplementary demonstrations where they do not interrupt the main explanation.
 
 Select the explanatory approach using SKILL.md before choosing a renderer or installing tools. Use only the production guidance needed for that approach. A topic or the presence of a sequence does not by itself establish a need for slides, interaction, or animation.
@@ -22,7 +24,7 @@ Use the requested presentation format and choose libraries according to the capa
 
 Use a diagram when the main difficulty is structure or relationship. Use an image when the main difficulty is recognition, spatial form, or a concrete situation.
 
-Start with the relationship that the learner must see. Remove objects that do not support that relationship. Use exact labels and consistent colors. Use arrows only when they show direction, dependency, movement, or sequence. Add a short caption that states what the learner should notice.
+Start with the relationship the learner struggles to see. Connect it to a familiar example or representation when useful. Remove objects that do not support that relationship. Use exact labels and consistent colors. Use arrows only when they show direction, dependency, movement, or sequence. Add a short caption that states what the learner should notice.
 
 Do not use a decorative image as a substitute for a missing explanation. Do not use generated images for exact values, equations, algorithms, data, or state transitions. Use code or an exact diagram for those cases.
 
@@ -31,6 +33,8 @@ Do not use a decorative image as a substitute for a missing explanation. Do not 
 Use an HTML page when a learner should change a variable, step through a process, compare alternatives, or inspect hidden state. The page must teach through the interaction. It must not be a static slide deck with buttons added.
 
 Prefer learner-controlled exploration when testing alternatives or choosing the pace helps understanding. Use slide navigation when staged guidance helps; use a continuous layout when learners need to compare information together. A play button or an animated transition alone does not justify an interactive explanation.
+
+Give each control a learning purpose, such as testing a prediction, comparing cases, or exposing hidden state. Start with inputs and examples the learner can interpret, then introduce useful variations.
 
 Define the model before designing the interface:
 
@@ -55,7 +59,7 @@ For an interactive artifact in the conversation, use the host's available visual
 
 Use this form when a deliberately timed visual progression makes a transformation, geometric relationship, invisible process, or change of viewpoint easier to understand. Choose interaction instead when learners need to test alternatives or inspect states at their own pace. Animation may be embedded in HTML or delivered as a video according to the task.
 
-Start with one question and one visual model. Build that model gradually. Label objects before using them. Animate one meaningful change at a time. Hold important states long enough for inspection. Use camera movement only to guide attention or reveal a relationship.
+Start with one question and one visual model. Build that model gradually. Label objects before using them. Animate one meaningful change at a time. Hold important states long enough for inspection. Allow more time for unfamiliar transitions and explain their causes before building on them. Use camera movement only to guide attention or reveal a relationship.
 
 Prefer this sequence:
 
@@ -80,7 +84,7 @@ Use a 3Blue1Brown-inspired conceptual approach when requested or when useful for
 
 Check the underlying example without relying on the visual output. Check the initial state, each important transition, the changed example, and the final rule.
 
-Check whether the selected medium helps learners understand the identified difficulty. Simplify elements that add production complexity without explanatory value, while preserving the requested format and useful accessibility support.
+Check that learners can interpret the labels, notation, controls, and transitions using established prerequisites or explanations provided in the artifact. Check whether the selected medium helps learners understand the identified difficulty and reach the learning goal. Simplify elements that add production complexity without explanatory value, while preserving the requested format and useful accessibility support.
 
 Inspect rendered output at the intended viewing sizes. For slides, check navigation, content fit, and readability, including expanded or revealed content. For interactive formats, check control effects, shared state, keyboard focus, answer reveals, and Reset against its defined scope. Check readability when paused and timing and synchronization when narration is present.
 
