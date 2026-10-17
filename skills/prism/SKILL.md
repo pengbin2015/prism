@@ -68,6 +68,8 @@ Adapt this sequence to the task. Do not force every step into a short answer.
 
 Keep names, colors, units, notation, and inputs consistent. Label simulations and simplifications. State where an analogy stops matching the real mechanism.
 
+When a learner remains confused or gives reasoning that reveals a gap, revisit the diagnosis. Use their feedback to locate the unresolved step; ask a focused question only if the gap is unclear. Change the example, representation, or prerequisite support to address that gap, rather than merely repeating or lengthening the explanation. Preserve confirmed knowledge, the learning goal, and any requested format. Check the revised idea with a small prediction or application when useful. See [learner-discovery.md](references/learner-discovery.md#respond-to-unresolved-confusion) for an example. Do not claim understanding from silence or artifact checks alone.
+
 For slide decks, give each slide a clear purpose that advances the learning objective. Connect examples and activities across slides. Explain changes in context or assumptions before learners use the new information.
 
 ## 5. Write clearly

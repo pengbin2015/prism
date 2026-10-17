@@ -30,6 +30,14 @@ Use the reasoning in the answer to choose the next explanation. An incorrect pre
 
 If the learner cannot answer, introduce the relevant prerequisite through an example and adjust as feedback arrives. If they request an immediate explanation, proceed with a brief assumption about the starting point.
 
+## Respond to unresolved confusion
+
+Use the learner's response as evidence about the specific gap. Retain what they have already demonstrated. If they only say “I still don't get it,” ask which step became unclear or offer a small example to locate it. If their reasoning already identifies the gap, revise the explanation directly.
+
+For example, a learner understands halving but asks: “Why is the cost logarithmic rather than n/2?” The gap is the distinction between candidates remaining after one step and the number of steps. Switch from tracing a search target to counting repeated halvings: 8 candidates become 4, then 2, then 1. Three halvings reduce the set to one candidate; 4 is the size after the first halving. Connect that count to logarithms. If useful, ask how many halvings reduce 16 candidates to one. Keep this count separate from the exact number of comparisons in a particular binary-search implementation.
+
+If confusion persists, revise the diagnosis and approach using the new feedback. Do not restart the full audience interview, add unrelated detail, or keep quizzing after the learner asks to move on. Judge understanding from their reasoning or application when available; a correct artifact or no further questions does not establish mastery.
+
 ## Teaching groups
 
 For mixed audiences, establish shared prerequisites and the intended outcome. Use a common starting example, brief prerequisite support, and optional depth when useful. Do not assume that all learners know a topic because some do.
